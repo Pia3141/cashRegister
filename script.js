@@ -19,9 +19,9 @@ let cid = [
 
 class Register {
   constructor(price, cid) {
-    this.price = price;
-    this.cid = cid;
-    this.cashPaid = Number(cash.value);
+    this.price = price * 100;
+    this.cid = cid.map((item) => (item[1] *= 100));
+    this.cashPaid = Number(cash.value) * 100;
   }
 
   calcChange() {
@@ -30,8 +30,8 @@ class Register {
 
   updateCash() {
     cashRegister.innerHTML = "";
-    cashRegister.innerHTML += this.cid.map((money) => {
-      `<p class="cashValue" >${money[0]}: <span>${money[1]}</span></p>`;
+    cid.forEach((money) => {
+      cashRegister.innerHTML += `<p class="cashValue">${money[0]}: <span>${money[1]}</span></p><hr>`;
     });
   }
 
