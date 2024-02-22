@@ -23,9 +23,6 @@ class Register {
     this.cid = cid;
     this.cashPaid = Number(cash.value);
   }
-  clearOutput() {
-    changeDue.textContent = "";
-  }
 
   calcChange() {
     let priceDiff = this.cashPaid - this.price;
@@ -37,6 +34,10 @@ class Register {
       `<p class="cashValue" >${money[0]}: <span>${money[1]}</span></p>`;
     });
   }
+
+  updateOutput(msg) {
+    changeDue.textContent = msg;
+  }
 }
 const store = new Register(price, cid);
 
@@ -46,5 +47,14 @@ cid.forEach((money) => {
   cashRegister.innerHTML += `<p class="cashValue">${money[0]}: <span>${money[1]}</span></p><hr>`;
 });
 
-const returnChange = (obj) => {};
-purchaseBtn.addEventListener("click", returnChange(store));
+const returnOutput = (obj) => {
+  if (obj.cashPaid < obj.price) {
+    alert("Customer does not have enough money to purchase the item");
+  } else if (obj.cashPaid == obj.price) {
+    obj.updateOutput("test");
+  }
+};
+
+purchaseBtn.addEventListener("click", () => {
+  returnOutput(store);
+});
