@@ -19,7 +19,7 @@ let cid = [
 
 class Register {
   constructor(price, cid) {
-    this.price = price * 100;
+    this.price = Number(price) * 100;
     this.cid = cid.map((item) => (item[1] *= 100));
     this.cashPaid = Number(cash.value) * 100;
   }
@@ -31,7 +31,9 @@ class Register {
   updateCash() {
     cashRegister.innerHTML = "";
     cid.forEach((money) => {
-      cashRegister.innerHTML += `<p class="cashValue">${money[0]}: <span>${money[1]}</span></p><hr>`;
+      cashRegister.innerHTML += `<p class="cashValue">${money[0]}: <span>${
+        money[1] / 100
+      }</span></p><hr>`;
     });
   }
 
@@ -44,7 +46,9 @@ const store = new Register(price, cid);
 priceTag.textContent = price;
 
 cid.forEach((money) => {
-  cashRegister.innerHTML += `<p class="cashValue">${money[0]}: <span>${money[1]}</span></p><hr>`;
+  cashRegister.innerHTML += `<p class="cashValue">${money[0]}: <span>${
+    money[1] / 100
+  }</span></p><hr>`;
 });
 
 const returnOutput = (obj) => {
