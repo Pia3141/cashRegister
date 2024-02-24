@@ -4,7 +4,7 @@ const changeDue = document.getElementById("change-due");
 const purchaseBtn = document.getElementById("purchase-btn");
 const cashRegister = document.getElementById("cash-register");
 
-let price = Number(1.87).toFixed(2);
+let price = 1.87;
 let cid = [
   ["PENNY", 1.01],
   ["NICKEL", 2.05],
@@ -16,23 +16,23 @@ let cid = [
   ["TWENTY", 60],
   ["ONE HUNDRED", 100],
 ];
-priceTag.textContent = price;
+priceTag.textContent = price.toFixed(2);
 cid.forEach((money) => {
-  cashRegister.innerHTML += `<p>${money[0]}: <span>$${money[1]}</span></p><hr>`;
+  cashRegister.innerHTML += `<p>${money[0]}: <span>$${money[1].toFixed(
+    2
+  )}</span></p><hr>`;
 });
 const hunCid = [];
 for (let i = 0; i < cid.length; i++) {
   hunCid.push([cid[i][0], Number(cid[i][1] * 100).toFixed(2)]);
 }
 
-console.log(hunCid);
-
 const updateCash = (arr) => {
   cashRegister.innerHTML = "";
   arr.forEach((money) => {
-    cashRegister.innerHTML += `<p>${money[0]}: <span>$${
+    cashRegister.innerHTML += `<p>${money[0]}: <span>$${Number(
       money[1] / 100
-    }</span></p><hr>`;
+    ).toFixed(2)}</span></p><hr>`;
   });
 };
 
