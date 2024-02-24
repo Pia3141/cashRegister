@@ -4,7 +4,7 @@ const changeDue = document.getElementById("change-due");
 const purchaseBtn = document.getElementById("purchase-btn");
 const cashRegister = document.getElementById("cash-register");
 
-let price = 3.26;
+let price = Number(1.87).toFixed(2);
 let cid = [
   ["PENNY", 1.01],
   ["NICKEL", 2.05],
@@ -16,7 +16,6 @@ let cid = [
   ["TWENTY", 60],
   ["ONE HUNDRED", 100],
 ];
-
 priceTag.textContent = price;
 cid.forEach((money) => {
   cashRegister.innerHTML += `<p>${money[0]}: <span>$${money[1]}</span></p><hr>`;
@@ -45,25 +44,19 @@ const formatCounts = (obj) => {
   const objArr = Object.entries(obj);
   const filteredStr = objArr
     .filter((item) => item[1] > 0)
-    .map((item) => [item[0].toUpperCase(), item[1]].join(": $"))
+    .map((item) => [item[0].toUpperCase(), item[1].toFixed(2)].join(": $"))
     .join(" ");
   console.log(filteredStr);
   return filteredStr;
 };
 
 const check = (arr, msg) => {
-  const status = [
-    "Status: INSUFFICIENT_FUNDS",
-    "Status: CLOSED",
-    "Status: OPEN",
-  ];
+  const status = ["Status: CLOSED", "Status: OPEN"];
 
   if (arr.some((value) => value[1] > 0)) {
-    return `${status[2]} ${msg}`;
-  } else if (arr.every((value) => value[1] == 0)) {
+    updateCash(arr);
     return `${status[1]} ${msg}`;
   } else {
-    msg = "";
     return `${status[0]} ${msg}`;
   }
 };
@@ -135,12 +128,14 @@ const calcChange = () => {
     counts.penny += 0.01;
     hunCid[0][1] -= 1;
   }
-  //Status: OPEN TWENTY: $60 TEN: $20 FIVE: $15 ONE: $1
-  //QUARTER: $0.5 DIME: $0.2 PENNY: $0.04
-  updateCash(hunCid);
-  const msg = formatCounts(counts);
-  const statusMsg = check(hunCid, msg);
-  return updateOutput(statusMsg);
+
+  if (priceDiff > 0) {
+    return updateOutput("Status: INSUFFICIENT_FUNDS");
+  } else {
+    const msg = formatCounts(counts);
+    const statusMsg = check(hunCid, msg);
+    return updateOutput(statusMsg);
+  }
 };
 
 const returnOutput = () => {
