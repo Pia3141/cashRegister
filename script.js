@@ -81,53 +81,62 @@ const calcChange = () => {
     nickle: 0,
     penny: 0,
   };
-
+  //hundred
   while (priceDiff >= 10000 && hunCid[8][1] > 0) {
     priceDiff -= 10000;
     counts.hundred += 100;
     hunCid[8][1] -= 10000;
   }
+  //twenty
   while (priceDiff >= 2000 && hunCid[7][1] > 0) {
     priceDiff -= 2000;
     counts.twenty += 20;
     hunCid[7][1] -= 2000;
   }
+  //ten
   while (priceDiff >= 1000 && hunCid[6][1] > 0) {
     priceDiff -= 1000;
     counts.ten += 10;
     hunCid[6][1] -= 1000;
   }
-
+  //five
   while (priceDiff >= 500 && hunCid[5][1] > 0) {
     priceDiff -= 500;
     counts.five += 5;
     hunCid[5][1] -= 500;
   }
+  //one
   while (priceDiff >= 100 && hunCid[4][1] > 0) {
     priceDiff -= 100;
     counts.one += 1;
     hunCid[4][1] -= 100;
   }
+  //quarter 25ct
   while (priceDiff >= 25 && hunCid[3][1] > 0) {
     priceDiff -= 25;
     counts.quarter += 0.25;
     hunCid[3][1] -= 25;
   }
+  //dime 10ct
   while (priceDiff >= 10 && hunCid[2][1] > 0) {
     priceDiff -= 10;
-    counts.dive += 0.1;
+    counts.dime += 0.1;
     hunCid[2][1] -= 10;
   }
+  //nickel 5ct
   while (priceDiff >= 5 && hunCid[1][1] > 0) {
     priceDiff -= 5;
-    counts.dive += 0.05;
+    counts.nickle += 0.05;
     hunCid[1][1] -= 5;
   }
+  //dime 1ct
   while (priceDiff >= 1 && hunCid[0][1] > 0) {
     priceDiff -= 1;
-    counts.nickle += 0.01;
+    counts.penny += 0.01;
     hunCid[0][1] -= 1;
   }
+  //Status: OPEN TWENTY: $60 TEN: $20 FIVE: $15 ONE: $1
+  //QUARTER: $0.5 DIME: $0.2 PENNY: $0.04
   updateCash(hunCid);
   const msg = formatCounts(counts);
   const statusMsg = check(hunCid, msg);
