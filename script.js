@@ -18,9 +18,7 @@ let cid = [
 ];
 priceTag.textContent = price.toFixed(2);
 cid.forEach((money) => {
-  cashRegister.innerHTML += `<p>${money[0]}: <span>$${money[1].toFixed(
-    2
-  )}</span></p><hr>`;
+  cashRegister.innerHTML += `<p>${money[0]}: <span>$${money[1]}</span></p><hr>`;
 });
 const hunCid = [];
 for (let i = 0; i < cid.length; i++) {
@@ -44,7 +42,7 @@ const formatCounts = (obj) => {
   const objArr = Object.entries(obj);
   const filteredStr = objArr
     .filter((item) => item[1] > 0)
-    .map((item) => [item[0].toUpperCase(), item[1].toFixed(2)].join(": $"))
+    .map((item) => [item[0].toUpperCase(), Number(item[1])].join(": $"))
     .join(" ");
   console.log(filteredStr);
   return filteredStr;
