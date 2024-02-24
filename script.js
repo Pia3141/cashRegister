@@ -4,7 +4,7 @@ const changeDue = document.getElementById("change-due");
 const purchaseBtn = document.getElementById("purchase-btn");
 const cashRegister = document.getElementById("cash-register");
 
-let price = 1.87;
+let price = 3.26;
 let cid = [
   ["PENNY", 1.01],
   ["NICKEL", 2.05],
