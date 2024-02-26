@@ -20,10 +20,6 @@ priceTag.textContent = `$${price.toFixed(2)}`;
 cid.forEach((money) => {
   cashRegister.innerHTML += `<p>${money[0]}: <span>$${money[1]}</span></p><hr>`;
 });
-const hunCid = [];
-for (let i = 0; i < cid.length; i++) {
-  hunCid.push([cid[i][0], Number(cid[i][1] * 100).toFixed(2)]);
-}
 
 const updateCash = (arr) => {
   cashRegister.innerHTML = "";
@@ -45,7 +41,9 @@ const formatCounts = (obj) => {
     .map((item) =>
       [
         item[0].toUpperCase(),
-        Number(item[1]).toFixed(2).replace(/0$/, ""),
+        Number(item[1])
+          .toFixed(2)
+          .replace(/(.0)?0$/, ""),
       ].join(": $")
     )
     .join(" ");
@@ -65,6 +63,10 @@ const check = (arr, msg) => {
 };
 
 const calcChange = () => {
+  const hunCid = [];
+  for (let i = 0; i < cid.length; i++) {
+    hunCid.push([cid[i][0], Number(cid[i][1] * 100).toFixed(2)]);
+  }
   let priceDiff = Number(cash.value) * 100 - price * 100;
   let counts = {
     hundred: 0,
