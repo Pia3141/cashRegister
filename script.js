@@ -42,7 +42,12 @@ const formatCounts = (obj) => {
   const objArr = Object.entries(obj);
   const filteredStr = objArr
     .filter((item) => item[1] > 0)
-    .map((item) => [item[0].toUpperCase(), Number(item[1])].join(": $"))
+    .map((item) =>
+      [
+        item[0].toUpperCase(),
+        Number(item[1]).toFixed(2).replace(/0$/, ""),
+      ].join(": $")
+    )
     .join(" ");
   console.log(filteredStr);
   return filteredStr;
