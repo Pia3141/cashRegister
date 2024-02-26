@@ -16,7 +16,7 @@ let cid = [
   ["TWENTY", 60],
   ["ONE HUNDRED", 100],
 ];
-priceTag.textContent = price.toFixed(2);
+priceTag.textContent = `$${price.toFixed(2)}`;
 cid.forEach((money) => {
   cashRegister.innerHTML += `<p>${money[0]}: <span>$${money[1]}</span></p><hr>`;
 });
